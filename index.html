@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meta Finance 2025 - บันทึกรายรับรายจ่าย</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ปุ่มสามขีดตัวเลือก อยู่นอกสุดบนซ้าย เฉพาะเมื่ออยู่ใน dashboard เท่านั้น -->
+<div id="main-menu-bar" style="position:fixed;top:18px;left:18px;z-index:101;display:none;align-items:center;">
+  <button id="menu-btn" class="menu-btn" aria-label="เมนู">
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+  </button>
+  <span class="menu-label">ตัวเลือก</span>
+  <div id="menu-dropdown"></div>
+</div>
+
+<div id="auth-root" class="centered-auth">
+  <div class="auth-panel">
+    <div class="auth-brand">Meta Finance <span class="brand-year">2025</span></div>
+    <div class="auth-title" id="auth-title">เข้าสู่ระบบ</div>
+    <form class="auth-form" id="auth-form">
+      <div class="form-row" id="auth-username-row" style="display:none;">
+        <label for="auth-username">ชื่อผู้ใช้</label>
+        <input type="text" id="auth-username" autocomplete="username" placeholder="ชื่อผู้ใช้">
+      </div>
+      <div class="form-row" id="auth-email-row">
+        <label for="auth-email">อีเมล</label>
+        <input type="text" id="auth-email" autocomplete="username" placeholder="อีเมล">
+      </div>
+      <div class="form-row" id="auth-password-row">
+        <label for="auth-password">รหัสผ่าน</label>
+        <div class="pw-wrap">
+          <input type="password" id="auth-password" autocomplete="current-password" placeholder="รหัสผ่าน">
+          <button type="button" id="toggle-pw" class="pw-toggle-btn" aria-label="แสดง/ซ่อนรหัสผ่าน">👁️</button>
+        </div>
+      </div>
+      <div class="form-row" id="remember-row">
+        <label class="remember-label">
+          <input type="checkbox" id="remember-me"> จดจำฉันไว้
+        </label>
+      </div>
+      <button type="submit" class="btn-main" id="auth-submit-btn">เข้าสู่ระบบ</button>
+    </form>
+    <div class="auth-links">
+      <span class="auth-link" id="switch-login" style="display:none;">เข้าสู่ระบบ</span>
+      <span class="auth-link" id="switch-register">สมัครสมาชิก</span>
+      <span class="auth-link" id="switch-forgot">ลืมรหัสผ่าน?</span>
+    </div>
+    <div class="auth-msg" id="auth-msg"></div>
+  </div>
+</div>
+
+<div id="dashboard-root" class="centered-auth" style="display:none;">
+  <div class="auth-panel" style="max-width:520px;">
+    <div class="dashboard-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div class="auth-brand" style="margin-bottom:0;">Meta Finance <span class="brand-year">2025</span></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button id="logout-btn" class="btn-main" style="background:#fb5c5c;padding:0.3em 1em;font-size:0.96em;">ออกจากระบบ</button>
+      </div>
+    </div>
+    <div class="auth-title" style="margin-bottom:10px;text-align:left;">บันทึกรายรับรายจ่าย</div>
+    <form id="add-form" class="auth-form" style="margin-bottom:18px;">
+      <div class="form-row">
+        <label for="type-input">ประเภท</label>
+        <select id="type-input">
+          <option value="income">รายรับ</option>
+          <option value="expense">รายจ่าย</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="desc-input">รายละเอียด</label>
+        <input type="text" id="desc-input" placeholder="เช่น เงินเดือน, ข้าวกลางวัน">
+      </div>
+      <div class="form-row">
+        <label for="amount-input">จำนวนเงิน</label>
+        <input type="number" id="amount-input" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div class="form-row">
+        <label for="date-input">วันที่</label>
+        <input type="date" id="date-input">
+      </div>
+      <button type="submit" class="btn-main">บันทึก</button>
+    </form>
+    <div style="margin-bottom:12px;">
+      <strong>สรุปยอด:</strong>
+      <span id="total-income" style="color:#32e27b;">รายรับ: 0.00</span> |
+      <span id="total-expense" style="color:#fb5c5c;">รายจ่าย: 0.00</span> |
+      <span id="total-balance" style="color:#ffd966;">คงเหลือ: 0.00</span>
+    </div>
+    <div style="max-height:180px;overflow-y:auto;">
+      <table id="history-table" style="width:100%;background:rgba(0,0,0,0.06);border-radius:6px;">
+        <thead>
+          <tr style="color:#b9c7e6;">
+            <th>วันที่</th>
+            <th>ประเภท</th>
+            <th>รายละเอียด</th>
+            <th>จำนวน</th>
+            <th>ลบ</th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
