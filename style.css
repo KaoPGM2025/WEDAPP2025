@@ -1,0 +1,138 @@
+body { background: #161d2f; color: #e8f0ff; font-family: 'Inter', sans-serif; }
+.centered-auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.auth-panel { background: #222b43; border-radius: 18px; padding: 34px 28px; width: 95vw; max-width: 370px; }
+#dashboard-root .auth-panel { max-width: 520px; }
+.auth-form { display: flex; flex-direction: column; gap: 18px; }
+.form-row { display: flex; flex-direction: column; gap: 6px; }
+.auth-form label { font-size: 1em; color: #b9c7e6; font-weight: 600; }
+.auth-form input[type="text"], .auth-form input[type="password"], .auth-form input[type="number"], .auth-form input[type="date"], .auth-form select {
+  padding: 0.7em 1em;
+  border-radius: 8px;
+  border: 1.3px solid #27314d;
+  background: #1c2439;
+  color: #e8f0ff;
+  font-size: 1.1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+.pw-wrap { position: relative; display: flex; align-items: center; }
+.pw-wrap input { flex: 1; }
+.pw-toggle-btn {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #b9c7e6; font-size: 1.15em; cursor: pointer; padding: 0 4px;
+}
+#remember-row { margin-bottom: 0; margin-top: -8px; }
+.remember-label { font-size: 0.98em; font-weight: 400; color: #b9c7e6; display: flex; align-items: center; gap: 5px; }
+.btn-main {
+  background: #5b6aff; color: #fff; border: none; font-weight: bold; cursor: pointer;
+  padding: 0.8em 1.5em; font-size: 1.07em; border-radius: 8px; margin-top: 7px;
+  transition: background 0.14s;
+}
+.btn-main[disabled] { background: #8b98e6; cursor: not-allowed; }
+.auth-links { margin-top: 8px; display: flex; justify-content: space-between; gap: 7px; }
+.auth-link { color: #5b6aff; text-decoration: none; font-size: 0.99em; font-weight: 600; cursor: pointer; }
+.auth-msg { margin: 11px 0 0 0; text-align: center; color: #fb5c5c; min-height: 1.3em; }
+.auth-brand { text-align: center; font-size: 2.1rem; font-weight: bold; margin-bottom: 13px; color: #5b6aff; }
+.auth-title { text-align: center; font-weight: 600; font-size: 1.27em; color: #b9c7e6; margin-bottom: 21px; }
+#history-table th, #history-table td { font-size: 0.99em; padding: 4px 6px; text-align: center; }
+#history-table tr:nth-child(even) { background: #202748; }
+#history-table button { background:#fb5c5c; color:#fff; border:none; border-radius:3px; padding:0.1em 0.6em; cursor:pointer; font-size:1em;}
+
+#main-menu-bar {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+}
+.menu-label {
+  color: #ffd966;
+  font-size: 1.13em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+.menu-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #232b42;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-left: 0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  transition: background 0.18s;
+  position: relative;
+}
+.menu-btn:hover { background: #3c4669; }
+.menu-bar {
+  display: block;
+  width: 22px;
+  height: 3.1px;
+  background: #b9c7e6;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+#menu-dropdown {
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 54px;
+  background: #232b42;
+  color: #ffd966;
+  padding: 14px 22px 14px 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+  font-weight: 600;
+  font-size: 1.10em;
+  z-index: 100;
+  min-width: 110px;
+}
+/* ... โค้ดเดิมทั้งหมด ... */
+
+/* ปุ่ม toggle สไตล์ Google ในเมนูสามขีด */
+.google-btn {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px;
+  border: none;
+  background: #fff;
+  font-size: 1.09em;
+  color: #222b43;
+  border-radius: 18px;
+  box-shadow: 0 1px 4px rgba(60,64,67,.15);
+  cursor: pointer;
+  transition: background 0.18s;
+  font-weight: 600;
+  outline: none;
+  margin-bottom: 2px;
+  width: 100%;
+  justify-content: flex-start;
+}
+.google-btn:hover {
+  background: #f3f6fc;
+}
+.google-toggle {
+  width: 42px;
+  height: 22px;
+  border-radius: 11px;
+  display: inline-block;
+  position: relative;
+  transition: background 0.19s;
+}
+.google-circle {
+  position: absolute;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(60,64,67,.21);
+  transition: left 0.18s;
+}
