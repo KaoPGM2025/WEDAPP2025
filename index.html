@@ -284,6 +284,13 @@
         font-size: 1em;
         color: #e6ff60;
     }
+    #welcome-user {
+        font-size: 1.12em;
+        font-weight: bold;
+        color: #2fe3e5;
+        margin-bottom: 18px;
+        letter-spacing: 0.01em;
+    }
     h2, h3 {
         color: #2fe3e5;
         letter-spacing: 0.03em;
@@ -333,6 +340,7 @@
         
         <!-- Home (Cloud Pocket List) -->
         <section id="home-view">
+            <div id="welcome-user"></div>
             <h2>Cloud Pockets</h2>
             <button id="add-pocket-btn">+ สร้าง Cloud Pocket</button>
             <div id="pockets-list"></div>
@@ -555,6 +563,15 @@
         });
     }
 
+    // --------- Welcome User ---------
+    function showWelcome() {
+        const username = getSession();
+        let el = document.getElementById('welcome-user');
+        if (el) {
+            el.textContent = `Welcome, ${username}! 👋`;
+        }
+    }
+
     // --------- Modal functions ---------
     function showPocketModal(editIdx = null) {
         document.getElementById('pocket-modal').style.display = 'flex';
@@ -692,6 +709,7 @@
     function showApp() {
         document.getElementById('auth-section').style.display = 'none';
         document.getElementById('app-section').style.display = '';
+        showWelcome();
         renderPockets();
     }
     function showAuth() {
