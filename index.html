@@ -1,726 +1,790 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piggyverse Cloud Pocket - SavingOS</title>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Inter:wght@500;700&display=swap');
-    body {
-        font-family: 'Inter', 'Prompt', sans-serif;
-        background: linear-gradient(135deg, #46a6ff 0%, #2fe3e5 50%, #43ffb4 100%);
-        min-height: 100vh;
-        margin: 0;
-        color: #f0fafc;
-        letter-spacing: 0.01em;
-    }
-    .container {
-        max-width: 440px;
-        margin: 4vh auto;
-        background: rgba(18, 48, 87, 0.98);
-        border-radius: 28px;
-        box-shadow: 0 8px 48px 0 rgba(46, 210, 190, 0.19);
-        padding: 36px 22px;
-        position: relative;
-        overflow: hidden;
-        border: 1.5px solid #29c0e5;
-    }
-    .menu-bar {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        background: rgba(34, 230, 245, 0.10);
-        border-radius: 14px;
-        padding: 6px 6px 6px 12px;
-        box-shadow: 0 2px 8px 0 rgba(46, 210, 190, 0.12);
-    }
-    .menu-bar button {
-        border: none;
-        background: transparent;
-        color: #a8fff5;
-        padding: 8px 18px;
-        border-radius: 12px;
-        font-weight: 700;
-        font-family: inherit;
-        font-size: 1.01em;
-        cursor: pointer;
-        transition: background 0.14s, color 0.14s;
-        outline: none;
-    }
-    .menu-bar button.active, .menu-bar button.online {
-        background: linear-gradient(90deg,#46a6ff 0%,#29e5a6 100%);
-        color: #fff;
-    }
-    .menu-bar button.offline {
-        background: #2b6e7a;
-        color: #a1fff3;
-    }
-    .menu-bar button#logout-btn {
-        margin-left: auto;
-        background: #29c0e5;
-        color: #fff;
-    }
-    #pockets-list {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        margin-top: 20px;
-    }
-    .pocket-card {
-        background: linear-gradient(90deg,#1ba5e0 60%,#2fe3e5 100%);
-        border-radius: 20px;
-        padding: 16px 18px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        box-shadow: 0 2px 16px 0 rgba(46, 210, 190, 0.14);
-        border: 1px solid #43ffb4;
-        position: relative;
-    }
-    .pocket-profile {
-        font-size: 2.5rem;
-        border-radius: 50%;
-        border: 3px solid #fff;
-        width: 56px;
-        height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
-        color: #fff;
-        box-shadow: 0 1px 8px #1e274a38;
-    }
-    .pocket-info {
-        flex: 1;
-        min-width: 0;
-    }
-    .pocket-name {
-        font-size: 1.14rem;
-        font-weight: bold;
-        color: #fff;
-        text-shadow: 0 1px 4px #43ffb488;
-        margin-bottom: 2px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-    .pocket-meta {
-        font-size: 1rem;
-        color: #d2fff3;
-        margin-bottom: 6px;
-    }
-    .progress-bar-bg {
-        background: #054b4f;
-        border-radius: 8px;
-        height: 16px;
-        margin-top: 7px;
-        width: 100%;
-        overflow: hidden;
-        box-shadow: 0 0.5px 3px #29c0e580 inset;
-    }
-    .progress-bar {
-        background: linear-gradient(90deg,#43ffb4 0%,#29e5a6 60%,#46a6ff 100%);
-        height: 16px;
-        border-radius: 8px;
-        width: 0%;
-        transition: width 0.6s, background 0.5s;
-    }
-    .progress-bar.just-saved {
-        background: linear-gradient(90deg,#2fe3e5 0%,#43ffb4 100%);
-    }
-    .pocket-actions button, .pocket-actions input[type="number"] {
-        font-family: inherit;
-    }
-    .pocket-actions {
-        display: flex;
-        gap: 7px;
-        margin-top: 6px;
-    }
-    .pocket-actions input[type="number"] {
-        width: 65px;
-        padding: 7px;
-        border-radius: 7px;
-        font-size: 1em;
-        border: 1px solid #43ffb4;
-        background: #0c4270;
-        color: #f0fafc;
-        outline: none;
-    }
-    .pocket-actions button {
-        background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-        color: #fff;
-        border: none;
-        border-radius: 7px;
-        padding: 5px 13px;
-        font-size: 1em;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background 0.18s;
-    }
-    .pocket-actions button[disabled] {
-        background: #2b6e7a;
-        color: #a1fff3;
-        cursor: not-allowed;
-    }
-    .pocket-actions button:last-child {
-        background: #29c0e5;
-    }
-    #add-pocket-btn {
-        background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-        color: #fff;
-        border-radius: 13px;
-        border: none;
-        padding: 9px 18px;
-        margin-bottom: 10px;
-        font-size: 1em;
-        font-family: inherit;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        box-shadow: 0 1px 8px #1e274a38;
-        cursor: pointer;
-    }
-    #add-pocket-btn:hover {
-        opacity: 0.92;
-    }
-    .modal {
-        display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
-        background:rgba(34,230,245,0.13);
-        align-items:center; justify-content:center; z-index:20;
-    }
-    .modal form {
-        background:#181a2f;
-        border-radius:20px;
-        box-shadow:0 3px 16px #29c0e590;
-        padding:28px 22px;
-        display:flex; flex-direction:column; gap:13px; min-width:250px;
-        border: 1px solid #43ffb4;
-        color: #e5eaf5;
-    }
-    .modal form label {
-        font-size: 1em;
-        margin-bottom: 2px;
-    }
-    #profile-choices {
-        display: flex; gap: 10px; margin:8px 0 5px 0;
-    }
-    #profile-choices img, #profile-choices span {
-        width: 46px; height: 46px; border-radius:50%;
-        border: 3px solid #43ffb4;
-        background: linear-gradient(135deg,#0c4270 60%,#43ffb480 100%);
-        font-size:2.2rem; cursor:pointer;
-        display:flex; align-items:center; justify-content:center;
-        transition: border 0.15s, background 0.15s;
-    }
-    #profile-choices .selected {
-        border:3px solid #2fe3e5;
-        background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
-        color: #fff;
-    }
-    #graph-view, #history-view {
-        background: linear-gradient(90deg,#0c4270 60%,#43ffb420 100%);
-        border-radius: 18px;
-        padding: 18px 14px;
-        box-shadow: 0 1px 10px #29c0e520;
-    }
-    #history-list { padding-left: 0; }
-    #history-list li {
-        margin-bottom: 8px;
-        font-size: 1rem;
-        color: #a8fff5;
-    }
-    #clear-history-btn {
-        margin-bottom: 10px;
-        background: #29c0e5;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        padding: 7px 16px;
-        font-size: 1em;
-        font-family: inherit;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        cursor: pointer;
-        box-shadow: 0 1px 6px #43ffb430;
-    }
-    .auth-forms form { display: none; flex-direction: column; gap: 15px; }
-    .auth-forms form.active { display: flex; }
-    input[type="text"], input[type="password"], input[type="number"] {
-        padding: 13px 15px;
-        border-radius: 11px;
-        border: 1.5px solid #29c0e5;
-        background: #0c4270;
-        color: #f0fafc;
-        font-size: 1em;
-        outline: none;
-    }
-    input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
-        border-color: #43ffb4;
-    }
-    input[type="number"]::-webkit-inner-spin-button { appearance: none; }
-    button[type="submit"] {
-        background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-        color: #fff;
-        padding: 11px 0;
-        border: none;
-        border-radius: 13px;
-        font-weight: 700;
-        font-size: 1em;
-        cursor: pointer;
-        margin-top: 8px;
-        transition: background 0.16s;
-        font-family: inherit;
-        letter-spacing: 0.03em;
-    }
-    button[type="submit"]:hover { opacity: 0.93; }
-    .switch-link {
-        color: #2fe3e5;
-        cursor: pointer;
-        font-size: 0.96em;
-        text-align: right;
-        margin-top: 3px;
-    }
-    .message {
-        min-height: 18px;
-        font-size: 1em;
-        color: #e6ff60;
-    }
-    #welcome-user {
-        font-size: 1.12em;
-        font-weight: bold;
-        color: #2fe3e5;
-        margin-bottom: 18px;
-        letter-spacing: 0.01em;
-    }
-    h2, h3 {
-        color: #2fe3e5;
-        letter-spacing: 0.03em;
-        font-family: 'Inter','Prompt',sans-serif;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-    @media (max-width: 500px) {
-        .container { max-width: 99vw; padding: 15px 1vw; }
-        .modal form { min-width: 0; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piggyverse Cloud Pocket - SavingOS v31.01.1111</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Inter:wght@500;700&display=swap');
+body {
+    font-family: 'Inter', 'Prompt', sans-serif;
+    background: linear-gradient(135deg, #46a6ff 0%, #2fe3e5 50%, #43ffb4 100%);
+    min-height: 100vh;
+    margin: 0;
+    color: #f0fafc;
+    letter-spacing: 0.01em;
+}
+.theme-version {
+    position: fixed;
+    top: 10px;
+    right: 18px;
+    color: #fff;
+    background: linear-gradient(90deg,#43ffb4 0%,#46a6ff 100%);
+    padding: 5px 18px 5px 12px;
+    border-radius: 18px;
+    font-size: 1em;
+    font-family: 'Prompt', 'Inter', sans-serif;
+    font-weight: 700;
+    box-shadow: 0 2px 18px #43ffb470;
+    z-index: 30;
+    letter-spacing: 0.08em;
+    border: 1.2px solid #2fe3e5;
+    user-select: none;
+}
+.container {
+    max-width: 540px;
+    margin: 4vh auto;
+    background: rgba(18, 48, 87, 0.98);
+    border-radius: 28px;
+    box-shadow: 0 8px 48px 0 rgba(46, 210, 190, 0.19);
+    padding: 36px 22px;
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid #29c0e5;
+}
+.menu-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: rgba(34, 230, 245, 0.10);
+    border-radius: 14px;
+    padding: 6px 6px 6px 12px;
+    box-shadow: 0 2px 8px 0 rgba(46, 210, 190, 0.12);
+}
+.menu-bar button {
+    border: none;
+    background: transparent;
+    color: #a8fff5;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    font-size: 1.01em;
+    cursor: pointer;
+    transition: background 0.14s, color 0.14s;
+    outline: none;
+}
+.menu-bar button.active, .menu-bar button.online {
+    background: linear-gradient(90deg,#46a6ff 0%,#29e5a6 100%);
+    color: #fff;
+}
+.menu-bar button.offline {
+    background: #2b6e7a;
+    color: #a1fff3;
+}
+.menu-bar button#logout-btn {
+    margin-left: auto;
+    background: #29c0e5;
+    color: #fff;
+}
+#welcome-user {
+    font-size: 1.12em;
+    font-weight: bold;
+    color: #2fe3e5;
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+}
+#pockets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 20px;
+}
+.pocket-card {
+    background: linear-gradient(90deg,#1ba5e0 60%,#2fe3e5 100%);
+    border-radius: 20px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 16px 0 rgba(46, 210, 190, 0.14);
+    border: 1px solid #43ffb4;
+    position: relative;
+    min-width: 220px;
+    max-width: 420px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pocket-profile {
+    font-size: 2.5rem;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
+    color: #fff;
+    box-shadow: 0 1px 8px #1e274a38;
+}
+.pocket-info {
+    flex: 1;
+    min-width: 0;
+}
+.pocket-name {
+    font-size: 1.14rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 4px #43ffb488;
+    margin-bottom: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.pocket-meta {
+    font-size: 1rem;
+    color: #d2fff3;
+    margin-bottom: 6px;
+}
+.progress-bar-bg {
+    background: #054b4f;
+    border-radius: 8px;
+    height: 16px;
+    margin-top: 7px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 0.5px 3px #29c0e580 inset;
+}
+.progress-bar {
+    background: linear-gradient(90deg,#43ffb4 0%,#29e5a6 60%,#46a6ff 100%);
+    height: 16px;
+    border-radius: 8px;
+    width: 0%;
+    transition: width 0.6s, background 0.5s;
+}
+.progress-bar.just-saved {
+    background: linear-gradient(90deg,#2fe3e5 0%,#43ffb4 100%);
+}
+.pocket-actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 6px;
+}
+.pocket-actions input[type="number"] {
+    width: 65px;
+    padding: 7px;
+    border-radius: 7px;
+    font-size: 1em;
+    border: 1px solid #43ffb4;
+    background: #0c4270;
+    color: #f0fafc;
+    outline: none;
+}
+.pocket-actions button {
+    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 5px 13px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.pocket-actions button[disabled] {
+    background: #2b6e7a;
+    color: #a1fff3;
+    cursor: not-allowed;
+}
+.pocket-actions button:last-child {
+    background: #29c0e5;
+}
+#add-pocket-btn {
+    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
+    color: #fff;
+    border-radius: 13px;
+    border: none;
+    padding: 9px 18px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 1px 8px #1e274a38;
+    cursor: pointer;
+}
+#add-pocket-btn:hover {
+    opacity: 0.92;
+}
+#graph-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 11px;
+}
+#graph-switch button {
+    background: #183b4e;
+    color: #ffe06b;
+    border: 1.5px solid #43ffb4;
+    font-weight: 700;
+    border-radius: 8px;
+    font-size: 1em;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+}
+#graph-switch button.active {
+    background: linear-gradient(90deg,#43ffb4 0%,#46a6ff 100%);
+    color: #fff;
+}
+.modal {
+    display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+    background:rgba(34,230,245,0.13);
+    align-items:center; justify-content:center; z-index:20;
+}
+.modal[style*="display: flex"] {
+    display: flex !important;
+}
+.modal form {
+    background:#181a2f;
+    border-radius:20px;
+    box-shadow:0 3px 16px #29c0e590;
+    padding:28px 22px;
+    display:flex; flex-direction:column; gap:13px; min-width:250px;
+    border: 1px solid #43ffb4;
+    color: #e5eaf5;
+    max-width: 96vw;
+    margin: auto;
+}
+.modal form label {
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+#profile-choices {
+    display: flex; gap: 10px; margin:8px 0 5px 0;
+}
+#profile-choices span {
+    width: 46px; height: 46px; border-radius:50%;
+    border: 3px solid #43ffb4;
+    background: linear-gradient(135deg,#0c4270 60%,#43ffb480 100%);
+    font-size:2.2rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: border 0.15s, background 0.15s;
+}
+#profile-choices .selected {
+    border:3px solid #2fe3e5;
+    background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
+    color: #fff;
+}
+#graph-view, #history-view {
+    background: linear-gradient(90deg,#0c4270 60%,#43ffb420 100%);
+    border-radius: 18px;
+    padding: 18px 14px;
+    box-shadow: 0 1px 10px #29c0e520;
+}
+#history-list { padding-left: 0; }
+#history-list li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #a8fff5;
+}
+#clear-history-btn {
+    margin-bottom: 10px;
+    background: #29c0e5;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 16px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 1px 6px #43ffb430;
+}
+.auth-forms form { display: none; flex-direction: column; gap: 15px; }
+.auth-forms form.active { display: flex; }
+input[type="text"], input[type="password"], input[type="number"] {
+    padding: 13px 15px;
+    border-radius: 11px;
+    border: 1.5px solid #29c0e5;
+    background: #0c4270;
+    color: #f0fafc;
+    font-size: 1em;
+    outline: none;
+}
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+    border-color: #43ffb4;
+}
+input[type="number"]::-webkit-inner-spin-button { appearance: none; }
+button[type="submit"] {
+    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
+    color: #fff;
+    padding: 11px 0;
+    border: none;
+    border-radius: 13px;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.16s;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+}
+button[type="submit"]:hover { opacity: 0.93; }
+.switch-link {
+    color: #2fe3e5;
+    cursor: pointer;
+    font-size: 0.96em;
+    text-align: right;
+    margin-top: 3px;
+}
+.message {
+    min-height: 18px;
+    font-size: 1em;
+    color: #e6ff60;
+}
+@media (max-width: 500px) {
+    .container { max-width: 99vw; padding: 15px 1vw; }
+    .modal form { min-width: 0; max-width: 99vw; }
+    .pocket-card { min-width: 0; max-width: 99vw; }
+}
+</style>
 </head>
 <body>
-    <!-- Auth section -->
-    <div class="container" id="auth-section">
-        <div class="auth-forms">
-            <form id="login-form" class="active">
-                <h2>เข้าสู่ระบบ</h2>
-                <input type="text" id="login-username" placeholder="ชื่อผู้ใช้" required>
-                <input type="password" id="login-password" placeholder="รหัสผ่าน" required>
-                <button type="submit">เข้าสู่ระบบ</button>
-                <span class="switch-link" onclick="switchForm('register-form')">ยังไม่มีบัญชี? สมัครสมาชิก</span>
-                <div class="message" id="login-message"></div>
-            </form>
-            <form id="register-form">
-                <h2>สมัครสมาชิก</h2>
-                <input type="text" id="register-username" placeholder="ชื่อผู้ใช้" required>
-                <input type="password" id="register-password" placeholder="รหัสผ่าน" required>
-                <input type="password" id="register-password2" placeholder="ยืนยันรหัสผ่าน" required>
-                <button type="submit">สมัครสมาชิก</button>
-                <span class="switch-link" onclick="switchForm('login-form')">มีบัญชีแล้ว? เข้าสู่ระบบ</span>
-                <div class="message" id="register-message"></div>
-            </form>
-        </div>
+<div class="theme-version">Piggyverse Theme v31.01.1111</div>
+<!-- Auth section -->
+<div class="container" id="auth-section">
+    <div class="auth-forms">
+        <form id="login-form" class="active">
+            <h2>เข้าสู่ระบบ</h2>
+            <input type="text" id="login-username" placeholder="ชื่อผู้ใช้" required>
+            <input type="password" id="login-password" placeholder="รหัสผ่าน" required>
+            <button type="submit">เข้าสู่ระบบ</button>
+            <span class="switch-link" onclick="switchForm('register-form')">ยังไม่มีบัญชี? สมัครสมาชิก</span>
+            <div class="message" id="login-message"></div>
+        </form>
+        <form id="register-form">
+            <h2>สมัครสมาชิก</h2>
+            <input type="text" id="register-username" placeholder="ชื่อผู้ใช้" required>
+            <input type="password" id="register-password" placeholder="รหัสผ่าน" required>
+            <input type="password" id="register-password2" placeholder="ยืนยันรหัสผ่าน" required>
+            <button type="submit">สมัครสมาชิก</button>
+            <span class="switch-link" onclick="switchForm('login-form')">มีบัญชีแล้ว? เข้าสู่ระบบ</span>
+            <div class="message" id="register-message"></div>
+        </form>
     </div>
+</div>
 
-    <!-- Piggyverse App Section -->
-    <div class="container" id="app-section" style="display:none;">
-        <nav class="menu-bar">
-            <button id="menu-home" class="active">🏠 หน้าหลัก</button>
-            <button id="menu-graph">📊 กราฟ</button>
-            <button id="menu-history">📜 ประวัติออม</button>
-            <button id="toggle-online" class="online">🟢 ออนไลน์</button>
-            <button id="logout-btn">🚪 ออกจากระบบ</button>
-        </nav>
-        
-        <!-- Home (Cloud Pocket List) -->
-        <section id="home-view">
-            <div id="welcome-user"></div>
-            <h2>Cloud Pockets</h2>
-            <button id="add-pocket-btn">+ สร้าง Cloud Pocket</button>
-            <div id="pockets-list"></div>
-        </section>
-        
-        <!-- Add/Edit Pocket Modal -->
-        <div class="modal" id="pocket-modal">
-            <form id="pocket-form">
-                <h3>Cloud Pocket</h3>
-                <label>ชื่อกระปุก <input type="text" id="pocket-name" required></label>
-                <label>โปรไฟล์
-                    <div id="profile-choices"></div>
-                </label>
-                <label>สกุลเงิน
-                    <select id="currency">
-                        <option value="THB">บาท (฿)</option>
-                        <option value="USD">ดอลลาร์ ($)</option>
-                    </select>
-                </label>
-                <label>ประเภทออม
-                    <select id="saving-type">
-                        <option value="ทั่วไป">ทั่วไป</option>
-                        <option value="รายวัน">รายวัน</option>
-                        <option value="รายเดือน">รายเดือน</option>
-                    </select>
-                </label>
-                <label>เป้าหมายเงิน <input type="number" id="goal-amount" min="1" required></label>
-                <button type="submit">บันทึก</button>
-                <button type="button" id="cancel-pocket">ยกเลิก</button>
-            </form>
-        </div>
-
-        <!-- Graph View -->
-        <section id="graph-view" style="display:none;">
-            <h2>กราฟการออม</h2>
-            <canvas id="saving-graph" width="350" height="200"></canvas>
-        </section>
-
-        <!-- History View -->
-        <section id="history-view" style="display:none;">
-            <h2>ประวัติการออม</h2>
-            <ul id="history-list"></ul>
-        </section>
+<!-- Piggyverse App Section -->
+<div class="container" id="app-section" style="display:none;">
+    <nav class="menu-bar">
+        <button id="menu-home" class="active">🏠 หน้าหลัก</button>
+        <button id="menu-graph">📊 กราฟ</button>
+        <button id="menu-history">📜 ประวัติออม</button>
+        <button id="toggle-online" class="online">🟢 ออนไลน์</button>
+        <button id="logout-btn">🚪 ออกจากระบบ</button>
+    </nav>
+    <section id="home-view">
+        <div id="welcome-user"></div>
+        <button id="add-pocket-btn">+ สร้าง Cloud Pocket</button>
+        <div id="pockets-list"></div>
+    </section>
+    <!-- Modal for Add Pocket -->
+    <div class="modal" id="pocket-modal">
+        <form id="pocket-form">
+            <h3>สร้าง Cloud Pocket</h3>
+            <label>ชื่อกระปุก <input type="text" id="pocket-name" required></label>
+            <label>โปรไฟล์
+                <div id="profile-choices"></div>
+            </label>
+            <label>ประเภทออม
+                <select id="saving-type">
+                    <option value="ทั่วไป">ทั่วไป</option>
+                    <option value="รายวัน">รายวัน</option>
+                    <option value="รายเดือน">รายเดือน</option>
+                </select>
+            </label>
+            <label>เป้าหมายเงิน <input type="number" id="goal-amount" min="1" required></label>
+            <button type="submit">บันทึก</button>
+            <button type="button" id="cancel-pocket">ยกเลิก</button>
+        </form>
     </div>
-    <script>
-    // --------- Auth & Session Logic ----------
-    const USER_KEY = 'neoverse_users';
-    const SESSION_KEY = 'neoverse_session';
+    <!-- Graph View -->
+    <section id="graph-view" style="display:none;">
+        <h2>กราฟการออม</h2>
+        <div id="graph-switch">
+            <button id="graph-daily" class="active">ต่อวัน</button>
+            <button id="graph-monthly">ต่อเดือน</button>
+        </div>
+        <canvas id="saving-graph" width="350" height="200"></canvas>
+    </section>
+    <!-- History View -->
+    <section id="history-view" style="display:none;">
+        <h2>ประวัติการออม</h2>
+        <ul id="history-list"></ul>
+    </section>
+</div>
+<script>
+const USER_KEY = 'neoverse_users';
+const SESSION_KEY = 'neoverse_session';
 
-    function getUsers() {
-        return JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+function getUsers() {
+    try { return JSON.parse(localStorage.getItem(USER_KEY) || '{}'); }
+    catch { return {}; }
+}
+function setUsers(users) {
+    localStorage.setItem(USER_KEY, JSON.stringify(users));
+}
+function getSession() {
+    return localStorage.getItem(SESSION_KEY);
+}
+function setSession(username) {
+    if (username) localStorage.setItem(SESSION_KEY, username);
+    else localStorage.removeItem(SESSION_KEY);
+}
+function switchForm(formId) {
+    document.querySelectorAll('.auth-forms form').forEach(f => f.classList.remove('active'));
+    document.getElementById(formId).classList.add('active');
+    document.getElementById('login-message').textContent = '';
+    document.getElementById('register-message').textContent = '';
+}
+document.getElementById('register-form').onsubmit = function (e) {
+    e.preventDefault();
+    const username = document.getElementById('register-username').value.trim();
+    const password = document.getElementById('register-password').value;
+    const password2 = document.getElementById('register-password2').value;
+    const msg = document.getElementById('register-message');
+    let users = getUsers();
+    if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+        msg.textContent = "ชื่อผู้ใช้ควรมี 3-20 ตัวอักษร (a-z, 0-9, _)";
+        return;
     }
-    function setUsers(users) {
-        localStorage.setItem(USER_KEY, JSON.stringify(users));
+    if (users[username]) {
+        msg.textContent = "ชื่อผู้ใช้นี้ถูกใช้งานแล้ว";
+        return;
     }
-    function getSession() {
-        return localStorage.getItem(SESSION_KEY);
+    if (password.length < 6) {
+        msg.textContent = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
+        return;
     }
-    function setSession(username) {
-        if (username) localStorage.setItem(SESSION_KEY, username);
-        else localStorage.removeItem(SESSION_KEY);
+    if (password !== password2) {
+        msg.textContent = "รหัสผ่านไม่ตรงกัน";
+        return;
     }
-    function switchForm(formId) {
-        document.querySelectorAll('.auth-forms form').forEach(f => f.classList.remove('active'));
-        document.getElementById(formId).classList.add('active');
-        document.getElementById('login-message').textContent = '';
-        document.getElementById('register-message').textContent = '';
+    users[username] = { password: password, pockets: [], history: [] };
+    setUsers(users);
+    msg.textContent = "สมัครสำเร็จ! กรุณาเข้าสู่ระบบ";
+    setTimeout(() => switchForm('login-form'), 900);
+};
+document.getElementById('login-form').onsubmit = function (e) {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const msg = document.getElementById('login-message');
+    let users = getUsers();
+    if (!users[username] || users[username].password !== password) {
+        msg.textContent = "ชื่อผู้ใช้หรือรหัสผ่านผิด";
+        return;
     }
-    document.getElementById('register-form').onsubmit = function (e) {
-        e.preventDefault();
-        const username = document.getElementById('register-username').value.trim();
-        const password = document.getElementById('register-password').value;
-        const password2 = document.getElementById('register-password2').value;
-        const msg = document.getElementById('register-message');
-        let users = getUsers();
-        if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
-            msg.textContent = "ชื่อผู้ใช้ควรมี 3-20 ตัวอักษร (a-z, 0-9, _)";
-            return;
-        }
-        if (users[username]) {
-            msg.textContent = "ชื่อผู้ใช้นี้ถูกใช้งานแล้ว";
-            return;
-        }
-        if (password.length < 6) {
-            msg.textContent = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
-            return;
-        }
-        if (password !== password2) {
-            msg.textContent = "รหัสผ่านไม่ตรงกัน";
-            return;
-        }
-        users[username] = { password: password, pockets: [], history: [] };
-        setUsers(users);
-        msg.textContent = "สมัครสำเร็จ! กรุณาเข้าสู่ระบบ";
-        setTimeout(() => switchForm('login-form'), 900);
-    };
-    document.getElementById('login-form').onsubmit = function (e) {
-        e.preventDefault();
-        const username = document.getElementById('login-username').value.trim();
-        const password = document.getElementById('login-password').value;
-        const msg = document.getElementById('login-message');
-        let users = getUsers();
-        if (!users[username] || users[username].password !== password) {
-            msg.textContent = "ชื่อผู้ใช้หรือรหัสผ่านผิด";
-            return;
-        }
-        setSession(username);
-        showApp();
-    };
-    document.getElementById('logout-btn').onclick = function () {
-        setSession(null);
-        showAuth();
-    };
+    setSession(username);
+    showApp();
+};
+document.getElementById('logout-btn').onclick = function () {
+    setSession(null);
+    showAuth();
+};
+const piggyProfiles = [
+    {id: 1, img: "🐷"},
+    {id: 2, img: "🦄"},
+    {id: 3, img: "🍭"},
+    {id: 4, img: "🌈"},
+    {id: 5, img: "🐻"}
+];
+let isOnline = true;
+let selectedProfileId = 1;
 
-    // --------- Piggyverse Cloud Pocket Logic ----------
-    const piggyProfiles = [
-        {id: 1, img: "🐷"},
-        {id: 2, img: "🦄"},
-        {id: 3, img: "🍭"},
-        {id: 4, img: "🌈"},
-        {id: 5, img: "🐻"}
-    ];
-    let isOnline = true;
-
-    // ------- Profile Picker State -------
-    let selectedProfileId = 1;
-
-    // ------- Profile Picker UI (and click handler) -------
-    function renderProfileChoices(selectedId = 1) {
-        selectedProfileId = selectedId; // set global for access in form submit
-        const pc = document.getElementById('profile-choices');
-        pc.innerHTML = '';
-        piggyProfiles.forEach(p => {
-            let el = document.createElement('span');
-            el.innerHTML = p.img;
-            el.className = p.id === selectedProfileId ? 'selected' : '';
-            el.dataset.id = p.id;
-            el.tabIndex = 0;
-            el.setAttribute('role', 'button');
-            el.setAttribute('aria-label', 'เลือกโปรไฟล์');
-            el.onclick = function() {
-                renderProfileChoices(p.id);
-            };
-            el.onkeydown = function(e) {
-                if (e.key === "Enter" || e.key === " ") renderProfileChoices(p.id);
-            };
-            pc.appendChild(el);
-        });
-    }
-
-    // --------- Cloud Pocket Storage ---------
-    function getPockets() {
-        const user = getSession();
-        let users = getUsers();
-        return (users[user] && users[user].pockets) || [];
-    }
-    function savePockets(pockets) {
-        const user = getSession();
-        let users = getUsers();
-        users[user].pockets = pockets;
-        setUsers(users);
-    }
-
-    // --------- Render Cloud Pockets ---------
-    function renderPockets() {
-        const pockets = getPockets();
-        const list = document.getElementById('pockets-list');
-        list.innerHTML = '';
-        if (!pockets.length) {
-            list.innerHTML = '<div style="color:#999;text-align:center;margin:20px 0;">ยังไม่มี Cloud Pocket</div>';
-            return;
-        }
-        pockets.forEach((pocket, idx) => {
-            let card = document.createElement('div');
-            card.className = 'pocket-card';
-            let profile = piggyProfiles.find(p => p.id === pocket.profile) || piggyProfiles[0];
-            let isJustSaved = pocket._justSaved;
-            card.innerHTML = `
-                <div class="pocket-profile">${profile.img}</div>
-                <div class="pocket-info">
-                    <div class="pocket-name">${pocket.name}</div>
-                    <div class="pocket-meta">${pocket.type} | เป้าหมาย: ${pocket.goal} ${pocket.currency==='THB'?'฿':'$'} | ออมแล้ว: ${pocket.saved || 0} ${pocket.currency==='THB'?'฿':'$'}</div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar${isJustSaved?' just-saved':''}" style="width:${Math.min(100, Math.round((pocket.saved||0)/pocket.goal*100))}%"></div>
-                    </div>
-                </div>
-                <div class="pocket-actions">
-                    <input type="number" min="1" placeholder="ออม..." style="width:65px;" ${isOnline?'':'disabled'}>
-                    <button ${isOnline?'':'disabled'}>ออม</button>
-                    <button style="background:#29c0e5;" ${isOnline?'':'disabled'}>ลบ</button>
-                </div>
-            `;
-            // Deposit
-            card.querySelector('button').onclick = function() {
-                if (!isOnline) return;
-                let val = parseInt(card.querySelector('input[type="number"]').value);
-                if (!val || val < 1) return;
-                if ((pocket.saved||0) + val > pocket.goal) val = pocket.goal - (pocket.saved||0);
-                pocket.saved = (pocket.saved||0) + val;
-                pocket._justSaved = true;
-                savePockets(pockets);
-                addHistory(pocket, val);
-                renderPockets();
-                setTimeout(()=>{
-                    delete pocket._justSaved;
-                    savePockets(pockets);
-                    renderPockets();
-                }, 900);
-            };
-            // Remove
-            card.querySelectorAll('button')[1].onclick = function() {
-                if (!isOnline) return;
-                if (confirm('ลบ Cloud Pocket นี้?')) {
-                    pockets.splice(idx, 1);
-                    savePockets(pockets);
-                    renderPockets();
-                }
-            };
-            list.appendChild(card);
-        });
-    }
-
-    // --------- Welcome User ---------
-    function showWelcome() {
-        const username = getSession();
-        let el = document.getElementById('welcome-user');
-        if (el) {
-            el.textContent = `Welcome, ${username}! 👋`;
-        }
-    }
-
-    // --------- Modal functions ---------
-    function showPocketModal(editIdx = null) {
-        document.getElementById('pocket-modal').style.display = 'flex';
-        selectedProfileId = 1; // default
-        renderProfileChoices(selectedProfileId);
-        if (editIdx !== null) {
-            // สำหรับอนาคต: edit
-        } else {
-            document.getElementById('pocket-form').reset();
-            renderProfileChoices(selectedProfileId);
-        }
-    }
-    function hidePocketModal() {
-        document.getElementById('pocket-modal').style.display = 'none';
-    }
-
-    // --------- Add Pocket ---------
-    document.getElementById('add-pocket-btn').onclick = () => showPocketModal();
-    document.getElementById('cancel-pocket').onclick = hidePocketModal;
-    document.getElementById('pocket-form').onsubmit = function(e) {
-        e.preventDefault();
-        const name = document.getElementById('pocket-name').value.trim();
-        const goal = parseInt(document.getElementById('goal-amount').value);
-        const currency = document.getElementById('currency').value;
-        const type = document.getElementById('saving-type').value;
-        // Always use the selectedProfileId from renderProfileChoices
-        const profileId = selectedProfileId;
-        let pockets = getPockets();
-        pockets.push({name, goal, currency, type, profile: profileId, saved: 0});
-        savePockets(pockets);
-        hidePocketModal();
-        renderPockets();
-    };
-
-    // --------- MenuBar Navigation ---------
-    ['home','graph','history'].forEach(view=>{
-        document.getElementById(`menu-${view}`).onclick = () => {
-            ['home','graph','history'].forEach(v=>{
-                document.getElementById(`menu-${v}`).classList.remove('active');
-                document.getElementById(`${v}-view`).style.display = v===view?'':'none';
-            });
-            document.getElementById(`menu-${view}`).classList.add('active');
-            if (view==='graph') renderGraph();
-            if (view==='history') renderHistory();
+function renderProfileChoices(selectedId = 1) {
+    selectedProfileId = selectedId;
+    const pc = document.getElementById('profile-choices');
+    pc.innerHTML = '';
+    piggyProfiles.forEach(p => {
+        let el = document.createElement('span');
+        el.innerHTML = p.img;
+        el.className = p.id === selectedProfileId ? 'selected' : '';
+        el.dataset.id = p.id;
+        el.tabIndex = 0;
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', 'เลือกโปรไฟล์');
+        el.onclick = function() {
+            renderProfileChoices(p.id);
         };
+        el.onkeydown = function(e) {
+            if (e.key === "Enter" || e.key === " ") renderProfileChoices(p.id);
+        };
+        pc.appendChild(el);
     });
+}
 
-    // Online/Offline toggle
-    document.getElementById('toggle-online').onclick = function() {
-        isOnline = !isOnline;
-        this.className = isOnline ? 'online' : 'offline';
-        this.innerHTML = isOnline ? '🟢 ออนไลน์' : '⚪️ ออฟไลน์';
-        renderPockets();
-    };
+function getPockets() {
+    const user = getSession();
+    let users = getUsers();
+    return (users[user] && users[user].pockets) || [];
+}
+function savePockets(pockets) {
+    const user = getSession();
+    let users = getUsers();
+    users[user].pockets = pockets;
+    setUsers(users);
+}
 
-    // --------- History ----------
-    function getHistory() {
-        const user = getSession();
-        let users = getUsers();
-        return (users[user] && users[user].history) || [];
+function renderPockets() {
+    const pockets = getPockets();
+    const list = document.getElementById('pockets-list');
+    list.innerHTML = '';
+    if (!pockets.length) {
+        list.innerHTML = '<div style="color:#999;text-align:center;margin:20px 0;">ยังไม่มี Cloud Pocket</div>';
+        return;
     }
-    function saveHistory(history) {
-        const user = getSession();
-        let users = getUsers();
-        users[user].history = history;
-        setUsers(users);
-    }
-    function addHistory(pocket, amount) {
-        let h = getHistory();
-        h.unshift({date: new Date().toISOString(), name: pocket.name, amount, currency: pocket.currency});
-        saveHistory(h);
-    }
-    function renderHistory() {
-        const list = document.getElementById('history-list');
-        const h = getHistory();
-        // ปุ่มลบประวัติทั้งหมด
-        if (!document.getElementById('clear-history-btn')) {
-            const btn = document.createElement('button');
-            btn.textContent = "🗑️ ลบประวัติทั้งหมด";
-            btn.id = "clear-history-btn";
-            btn.style.marginBottom = "10px";
-            btn.style.background = "#29c0e5";
-            btn.style.color = "#fff";
-            btn.style.border = "none";
-            btn.style.borderRadius = "10px";
-            btn.style.padding = "7px 16px";
-            btn.style.fontSize = "1em";
-            btn.style.fontFamily = "inherit";
-            btn.style.fontWeight = "600";
-            btn.style.letterSpacing = "0.02em";
-            btn.style.cursor = "pointer";
-            btn.style.boxShadow = "0 1px 6px #43ffb430";
-            btn.onclick = function() {
-                if (confirm('ต้องการลบประวัติการออมทั้งหมดหรือไม่?')) {
-                    saveHistory([]);
-                    renderHistory();
-                }
-            };
-            document.getElementById('history-view').insertBefore(btn, list);
-        }
-        if (!h.length) { list.innerHTML = '<li>ยังไม่มีประวัติการออม</li>'; return; }
-        list.innerHTML = '';
-        h.forEach(item=>{
-            let li = document.createElement('li');
-            li.textContent = `[${item.date.split('T')[0]}] ${item.name} +${item.amount} ${item.currency==='THB'?'฿':'$'}`;
-            list.appendChild(li);
+    pockets.forEach((pocket, idx) => {
+        let card = document.createElement('div');
+        card.className = 'pocket-card';
+        let profile = piggyProfiles.find(p => p.id === pocket.profile) || piggyProfiles[0];
+        let isJustSaved = pocket._justSaved;
+        card.innerHTML = `
+            <div class="pocket-profile">${profile.img}</div>
+            <div class="pocket-info">
+                <div class="pocket-name">${pocket.name}</div>
+                <div class="pocket-meta">${pocket.type} | เป้าหมาย: ${pocket.goal} ฿ | ออมแล้ว: ${pocket.saved || 0} ฿</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar${isJustSaved?' just-saved':''}" style="width:${Math.min(100, Math.round((pocket.saved||0)/pocket.goal*100))}%"></div>
+                </div>
+            </div>
+            <div class="pocket-actions">
+                <input type="number" min="1" placeholder="ออม..." style="width:65px;" ${isOnline?'':'disabled'}>
+                <button ${isOnline?'':'disabled'}>ออม</button>
+                <button style="background:#29c0e5;" ${isOnline?'':'disabled'}>ลบ</button>
+            </div>
+        `;
+        // Deposit
+        card.querySelector('button').onclick = function() {
+            if (!isOnline) return;
+            let val = parseInt(card.querySelector('input[type="number"]').value);
+            if (!val || val < 1) return;
+            if ((pocket.saved||0) + val > pocket.goal) val = pocket.goal - (pocket.saved||0);
+            pocket.saved = (pocket.saved||0) + val;
+            pocket._justSaved = true;
+            savePockets(pockets);
+            addHistory(pocket, val);
+            renderPockets();
+            setTimeout(()=>{
+                delete pocket._justSaved;
+                savePockets(pockets);
+                renderPockets();
+            }, 900);
+        };
+        // Remove
+        card.querySelectorAll('button')[1].onclick = function() {
+            if (!isOnline) return;
+            if (confirm('ลบ Cloud Pocket นี้?')) {
+                pockets.splice(idx, 1);
+                savePockets(pockets);
+                renderPockets();
+            }
+        };
+        list.appendChild(card);
+    });
+}
+
+function showPocketModal(editIdx = null) {
+    document.getElementById('pocket-modal').style.display = 'flex';
+    selectedProfileId = 1;
+    renderProfileChoices(selectedProfileId);
+    document.getElementById('pocket-form').reset();
+}
+function hidePocketModal() {
+    document.getElementById('pocket-modal').style.display = 'none';
+}
+
+document.getElementById('add-pocket-btn').onclick = () => showPocketModal();
+document.getElementById('cancel-pocket').onclick = hidePocketModal;
+document.getElementById('pocket-form').onsubmit = function(e) {
+    e.preventDefault();
+    const name = document.getElementById('pocket-name').value.trim();
+    const goal = parseInt(document.getElementById('goal-amount').value);
+    const type = document.getElementById('saving-type').value;
+    const profileId = selectedProfileId;
+    let pockets = getPockets();
+    if (!name || !goal || goal < 1) return;
+    pockets.push({name, goal, type, profile: profileId, saved: 0});
+    savePockets(pockets);
+    hidePocketModal();
+    renderPockets();
+};
+
+// MenuBar Navigation
+['home','graph','history'].forEach(view=>{
+    document.getElementById(`menu-${view}`).onclick = () => {
+        ['home','graph','history'].forEach(v=>{
+            document.getElementById(`menu-${v}`).classList.remove('active');
+            document.getElementById(`${v}-view`).style.display = v===view?'':'none';
         });
-    }
-
-    // --------- Graph (Simple Bar) ----------
-    function renderGraph() {
-        const c = document.getElementById('saving-graph');
-        const ctx = c.getContext('2d');
-        const pockets = getPockets();
-        ctx.clearRect(0,0,c.width,c.height);
-        let sum = pockets.reduce((s,p)=>s+(p.saved||0),0);
-        if (!sum) {
-            ctx.fillStyle = "#a8fff5";
-            ctx.font = "16px Inter,Prompt,sans-serif";
-            ctx.fillText("ยังไม่มีข้อมูลออม", 60, 110);
-            return;
-        }
-        let x = 20, y = 30, width = 300, height = 120, barH = 18, gap = 10;
-        pockets.forEach((p,i)=>{
-            let percent = (p.saved||0)/sum;
-            ctx.fillStyle = "#2fe3e5";
-            ctx.fillRect(x, y+i*(barH+gap), width*percent, barH);
-            ctx.fillStyle = "#f0fafc";
-            ctx.font = "bold 14px Inter,Prompt,sans-serif";
-            ctx.fillText(`${p.name} (${p.saved||0} ${p.currency==='THB'?'฿':'$'})`, x+4, y+13+i*(barH+gap));
-        });
-    }
-
-    // --------- UI Show/Hide ----------
-    function showApp() {
-        document.getElementById('auth-section').style.display = 'none';
-        document.getElementById('app-section').style.display = '';
-        showWelcome();
-        renderPockets();
-    }
-    function showAuth() {
-        document.getElementById('auth-section').style.display = '';
-        document.getElementById('app-section').style.display = 'none';
-        switchForm('login-form');
-    }
-    window.onload = function () {
-        if (getSession() && getUsers()[getSession()]) showApp();
-        else showAuth();
+        document.getElementById(`menu-${view}`).classList.add('active');
+        if (view==='graph') renderGraph();
+        if (view==='history') renderHistory();
     };
-    </script>
+});
+
+// Online/Offline toggle
+document.getElementById('toggle-online').onclick = function() {
+    isOnline = !isOnline;
+    this.className = isOnline ? 'online' : 'offline';
+    this.innerHTML = isOnline ? '🟢 ออนไลน์' : '⚪️ ออฟไลน์';
+    renderPockets();
+};
+
+// History
+function getHistory() {
+    const user = getSession();
+    let users = getUsers();
+    return (users[user] && users[user].history) || [];
+}
+function saveHistory(history) {
+    const user = getSession();
+    let users = getUsers();
+    users[user].history = history;
+    setUsers(users);
+}
+function addHistory(pocket, amount) {
+    let h = getHistory();
+    h.unshift({date: new Date().toISOString(), name: pocket.name, amount, currency: 'THB'});
+    saveHistory(h);
+}
+function renderHistory() {
+    const list = document.getElementById('history-list');
+    const h = getHistory();
+    if (!document.getElementById('clear-history-btn')) {
+        const btn = document.createElement('button');
+        btn.textContent = "🗑️ ลบประวัติทั้งหมด";
+        btn.id = "clear-history-btn";
+        btn.className = "clear-history-btn";
+        btn.onclick = function() {
+            if (confirm('ต้องการลบประวัติการออมทั้งหมดหรือไม่?')) {
+                saveHistory([]);
+                renderHistory();
+            }
+        };
+        document.getElementById('history-view').insertBefore(btn, list);
+    }
+    if (!h.length) { list.innerHTML = '<li>ยังไม่มีประวัติการออม</li>'; return; }
+    list.innerHTML = '';
+    h.forEach(item=>{
+        let li = document.createElement('li');
+        li.textContent = `[${item.date.split('T')[0]}] ${item.name} +${item.amount} ฿`;
+        list.appendChild(li);
+    });
+}
+
+// กราฟแท่ง: ยอดรวมการออมต่อวัน/ต่อเดือน
+let graphMode = "daily";
+document.getElementById("graph-daily").onclick = function() {
+    graphMode = "daily";
+    this.classList.add("active");
+    document.getElementById("graph-monthly").classList.remove("active");
+    renderGraph();
+};
+document.getElementById("graph-monthly").onclick = function() {
+    graphMode = "monthly";
+    this.classList.add("active");
+    document.getElementById("graph-daily").classList.remove("active");
+    renderGraph();
+};
+function renderGraph() {
+    const c = document.getElementById('saving-graph');
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0,0,c.width,c.height);
+    const history = getHistory();
+    if (!history.length) {
+        ctx.fillStyle = "#a8fff5";
+        ctx.font = "16px Inter,Prompt,sans-serif";
+        ctx.fillText("ยังไม่มีข้อมูลออม", 60, 110);
+        return;
+    }
+    let dataMap = {}, keys = [];
+    if (graphMode==="daily") {
+        history.forEach(item => {
+            const amt = parseInt(item.amount);
+            if (!amt || amt < 1) return;
+            const dstr = item.date ? item.date.split("T")[0] : "";
+            if (!dstr) return;
+            dataMap[dstr] = (dataMap[dstr]||0) + amt;
+        });
+        keys = Object.keys(dataMap).sort(); // date ascending
+    } else if (graphMode==="monthly") {
+        history.forEach(item => {
+            const amt = parseInt(item.amount);
+            if (!amt || amt < 1) return;
+            const d = new Date(item.date);
+            const key = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,"0")}`;
+            dataMap[key] = (dataMap[key]||0) + amt;
+        });
+        keys = Object.keys(dataMap).sort();
+    }
+    if (!keys.length) {
+        ctx.fillStyle = "#a8fff5";
+        ctx.font = "16px Inter,Prompt,sans-serif";
+        ctx.fillText("ยังไม่มีข้อมูลออม", 60, 110);
+        return;
+    }
+    // วาดกราฟแท่ง
+    let barW = 18, gap = 10, maxY = 150, startX = 38, baseY = 180;
+    if(keys.length>13) { barW = Math.max(8, 260/keys.length); gap = 4; }
+    const maxSum = Math.max(...Object.values(dataMap));
+    keys.forEach((k, i) => {
+        const sum = dataMap[k];
+        const h = Math.round((sum/maxSum) * maxY);
+        const x = startX + i*(barW+gap);
+        ctx.fillStyle = "#2fe3e5";
+        ctx.fillRect(x, baseY-h, barW, h);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 12px Inter,Prompt,sans-serif";
+        ctx.fillText(sum+" ฿", x, baseY-h-6);
+        ctx.save();
+        ctx.translate(x+barW/2, baseY+13);
+        ctx.rotate(-Math.PI/6);
+        ctx.textAlign = "center";
+        ctx.font = "11px Prompt,sans-serif";
+        ctx.fillStyle = "#ffe06b";
+        ctx.fillText(k, 0, 0);
+        ctx.restore();
+    });
+    // Y axis
+    ctx.strokeStyle = "#43ffb4";
+    ctx.beginPath();
+    ctx.moveTo(startX-10, baseY-maxY);
+    ctx.lineTo(startX-10, baseY+2);
+    ctx.stroke();
+    ctx.font = "12px Inter,Prompt,sans-serif";
+    ctx.fillStyle = "#43ffb4";
+    ctx.fillText(maxSum+" ฿", 2, baseY-maxY+8);
+    ctx.fillText("0", 12, baseY+2);
+}
+
+// Show Welcome
+function showWelcome() {
+    const username = getSession();
+    let el = document.getElementById('welcome-user');
+    if (el) {
+        el.textContent = `Welcome, ${username}! 👋`;
+    }
+}
+
+function showApp() {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('app-section').style.display = '';
+    showWelcome();
+    renderPockets();
+}
+function showAuth() {
+    document.getElementById('auth-section').style.display = '';
+    document.getElementById('app-section').style.display = 'none';
+    switchForm('login-form');
+}
+window.onload = function () {
+    if (getSession() && getUsers()[getSession()]) showApp();
+    else showAuth();
+};
+</script>
 </body>
 </html>
