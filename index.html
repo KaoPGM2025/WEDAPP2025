@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piggyverse Cloud Pocket - SavingOS v31.01.1111</title>
+<title>Piggyverse Cloud Pocket - Sparkle Wallet Theme</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Inter:wght@500;700&display=swap');
 body {
     font-family: 'Inter', 'Prompt', sans-serif;
-    background: linear-gradient(135deg, #46a6ff 0%, #2fe3e5 50%, #43ffb4 100%);
+    background: linear-gradient(135deg, #0e1647 0%, #7f53ac 35%, #43e97b 100%);
     min-height: 100vh;
     margin: 0;
-    color: #f0fafc;
+    color: #fafffa;
     letter-spacing: 0.01em;
 }
 .theme-version {
@@ -19,68 +19,148 @@ body {
     top: 10px;
     right: 18px;
     color: #fff;
-    background: linear-gradient(90deg,#43ffb4 0%,#46a6ff 100%);
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 50%,#7f53ac 100%);
     padding: 5px 18px 5px 12px;
     border-radius: 18px;
     font-size: 1em;
     font-family: 'Prompt', 'Inter', sans-serif;
     font-weight: 700;
-    box-shadow: 0 2px 18px #43ffb470;
+    box-shadow: 0 2px 18px #43e97b80;
     z-index: 30;
     letter-spacing: 0.08em;
-    border: 1.2px solid #2fe3e5;
+    border: 1.5px solid #7f53ac;
     user-select: none;
 }
 .container {
     max-width: 540px;
     margin: 4vh auto;
-    background: rgba(18, 48, 87, 0.98);
+    background: rgba(24, 18, 87, 0.97);
     border-radius: 28px;
-    box-shadow: 0 8px 48px 0 rgba(46, 210, 190, 0.19);
+    box-shadow: 0 8px 48px 0 rgba(127, 83, 172, 0.10);
     padding: 36px 22px;
     position: relative;
     overflow: hidden;
-    border: 1.5px solid #29c0e5;
+    border: 2.2px solid #43e97b;
 }
 .menu-bar {
     display: flex;
-    gap: 10px;
+    gap: 0;
     margin-bottom: 20px;
-    background: rgba(34, 230, 245, 0.10);
+    background: rgba(67, 233, 123, 0.13);
     border-radius: 14px;
-    padding: 6px 6px 6px 12px;
-    box-shadow: 0 2px 8px 0 rgba(46, 210, 190, 0.12);
+    padding: 6px 6px 6px 6px;
+    box-shadow: 0 2px 8px 0 rgba(67, 233, 123, 0.10);
+    overflow-x: unset;
 }
 .menu-bar button {
     border: none;
     background: transparent;
-    color: #a8fff5;
-    padding: 8px 18px;
-    border-radius: 12px;
+    color: #43e97b;
+    padding: 10px 0;
+    border-radius: 0;
     font-weight: 700;
-    font-family: inherit;
-    font-size: 1.01em;
+    font-family: 'Inter', 'Prompt', sans-serif;
+    font-size: 1.08em;
+    min-width: 114px;
+    max-width: 180px;
+    height: 44px;
     cursor: pointer;
-    transition: background 0.14s, color 0.14s;
+    transition: background 0.18s, color 0.17s;
     outline: none;
+    border-right: 1.5px solid #7f53ac44;
+    border-left: none;
+    margin: 0;
+    letter-spacing: 0.02em;
+    flex: 1 0 0px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.menu-bar button span {
+    display: block;
+    width: 100%;
+    font-family: 'Inter', 'Prompt', sans-serif;
+    font-weight: 700;
+    font-size: 1.03em;
+    letter-spacing: 0.01em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.menu-bar button:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-left: none !important;
+}
+.menu-bar button:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-right: none;
 }
 .menu-bar button.active, .menu-bar button.online {
-    background: linear-gradient(90deg,#46a6ff 0%,#29e5a6 100%);
-    color: #fff;
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 60%,#7f53ac 100%);
+    color: #0e1647;
+    box-shadow: 0 2px 8px #38f9d755;
+    z-index: 2;
 }
 .menu-bar button.offline {
     background: #2b6e7a;
-    color: #a1fff3;
+    color: #43e97b;
 }
 .menu-bar button#logout-btn {
-    margin-left: auto;
-    background: #29c0e5;
-    color: #fff;
+    background: #38f9d7;
+    color: #0e1647;
+    min-width: 114px;
+    font-weight: 700;
+    z-index: 2;
+    border-radius: 0 12px 12px 0;
+    border-right: none;
+}
+@media (max-width: 640px) {
+    .menu-bar button {
+        font-size: 1em;
+        min-width: 80px;
+        padding: 9px 0;
+        height: 38px;
+        max-width: 140px;
+    }
+    .menu-bar button span {
+        font-size: 1em;
+    }
+}
+@media (max-width: 500px) {
+    .container { max-width: 99vw; padding: 15px 1vw; }
+    .modal form { min-width: 0; max-width: 99vw; }
+    .pocket-card { min-width: 0; max-width: 99vw; }
+    .menu-bar { padding: 3px 1px 3px 1px; }
+}
+#graph-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 11px;
+}
+#graph-switch button {
+    background: #231d4f;
+    color: #43e97b;
+    border: 1.5px solid #43e97b;
+    font-weight: 700;
+    border-radius: 8px;
+    font-size: 1em;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+}
+#graph-switch button.active {
+    background: linear-gradient(90deg,#43e97b 0%,#7f53ac 100%);
+    color: #17113a;
 }
 #welcome-user {
     font-size: 1.12em;
     font-weight: bold;
-    color: #2fe3e5;
+    color: #43e97b;
     margin-bottom: 18px;
     letter-spacing: 0.01em;
 }
@@ -91,14 +171,14 @@ body {
     margin-top: 20px;
 }
 .pocket-card {
-    background: linear-gradient(90deg,#1ba5e0 60%,#2fe3e5 100%);
+    background: linear-gradient(90deg,#43e97b 60%,#38f9d7 90%,#7f53ac 100%);
     border-radius: 20px;
     padding: 16px 18px;
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 2px 16px 0 rgba(46, 210, 190, 0.14);
-    border: 1px solid #43ffb4;
+    box-shadow: 0 2px 16px 0 rgba(67, 233, 123, 0.14);
+    border: 1.7px solid #43e97b;
     position: relative;
     min-width: 220px;
     max-width: 420px;
@@ -115,9 +195,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
+    background: linear-gradient(135deg,#7f53ac 10%,#43e97b 100%);
     color: #fff;
-    box-shadow: 0 1px 8px #1e274a38;
+    box-shadow: 0 1px 8px #43e97b38;
 }
 .pocket-info {
     flex: 1;
@@ -126,8 +206,8 @@ body {
 .pocket-name {
     font-size: 1.14rem;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 1px 4px #43ffb488;
+    color: #0e1647;
+    text-shadow: 0 1px 4px #7f53ac55;
     margin-bottom: 2px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -135,27 +215,27 @@ body {
 }
 .pocket-meta {
     font-size: 1rem;
-    color: #d2fff3;
+    color: #17113a;
     margin-bottom: 6px;
 }
 .progress-bar-bg {
-    background: #054b4f;
+    background: #16315c;
     border-radius: 8px;
     height: 16px;
     margin-top: 7px;
     width: 100%;
     overflow: hidden;
-    box-shadow: 0 0.5px 3px #29c0e580 inset;
+    box-shadow: 0 0.5px 3px #38f9d780 inset;
 }
 .progress-bar {
-    background: linear-gradient(90deg,#43ffb4 0%,#29e5a6 60%,#46a6ff 100%);
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 60%,#7f53ac 100%);
     height: 16px;
     border-radius: 8px;
     width: 0%;
     transition: width 0.6s, background 0.5s;
 }
 .progress-bar.just-saved {
-    background: linear-gradient(90deg,#2fe3e5 0%,#43ffb4 100%);
+    background: linear-gradient(90deg,#fff 0%,#43e97b 100%);
 }
 .pocket-actions {
     display: flex;
@@ -167,14 +247,14 @@ body {
     padding: 7px;
     border-radius: 7px;
     font-size: 1em;
-    border: 1px solid #43ffb4;
-    background: #0c4270;
-    color: #f0fafc;
+    border: 1px solid #43e97b;
+    background: #1a1c3e;
+    color: #43e97b;
     outline: none;
 }
 .pocket-actions button {
-    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-    color: #fff;
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 100%);
+    color: #0e1647;
     border: none;
     border-radius: 7px;
     padding: 5px 13px;
@@ -185,15 +265,16 @@ body {
 }
 .pocket-actions button[disabled] {
     background: #2b6e7a;
-    color: #a1fff3;
+    color: #43e97b;
     cursor: not-allowed;
 }
 .pocket-actions button:last-child {
-    background: #29c0e5;
+    background: #7f53ac;
+    color: #fff;
 }
 #add-pocket-btn {
-    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-    color: #fff;
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 100%);
+    color: #0e1647;
     border-radius: 13px;
     border: none;
     padding: 9px 18px;
@@ -202,35 +283,15 @@ body {
     font-family: inherit;
     font-weight: 700;
     letter-spacing: 0.05em;
-    box-shadow: 0 1px 8px #1e274a38;
+    box-shadow: 0 1px 8px #43e97b38;
     cursor: pointer;
 }
 #add-pocket-btn:hover {
     opacity: 0.92;
 }
-#graph-switch {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 11px;
-}
-#graph-switch button {
-    background: #183b4e;
-    color: #ffe06b;
-    border: 1.5px solid #43ffb4;
-    font-weight: 700;
-    border-radius: 8px;
-    font-size: 1em;
-    padding: 6px 16px;
-    cursor: pointer;
-    transition: background 0.12s, color 0.12s;
-}
-#graph-switch button.active {
-    background: linear-gradient(90deg,#43ffb4 0%,#46a6ff 100%);
-    color: #fff;
-}
 .modal {
     display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
-    background:rgba(34,230,245,0.13);
+    background:rgba(67,233,123,0.13);
     align-items:center; justify-content:center; z-index:20;
 }
 .modal[style*="display: flex"] {
@@ -239,11 +300,11 @@ body {
 .modal form {
     background:#181a2f;
     border-radius:20px;
-    box-shadow:0 3px 16px #29c0e590;
+    box-shadow:0 3px 16px #43e97b90;
     padding:28px 22px;
     display:flex; flex-direction:column; gap:13px; min-width:250px;
-    border: 1px solid #43ffb4;
-    color: #e5eaf5;
+    border: 1px solid #38f9d7;
+    color: #43e97b;
     max-width: 96vw;
     margin: auto;
 }
@@ -256,33 +317,33 @@ body {
 }
 #profile-choices span {
     width: 46px; height: 46px; border-radius:50%;
-    border: 3px solid #43ffb4;
-    background: linear-gradient(135deg,#0c4270 60%,#43ffb480 100%);
+    border: 3px solid #43e97b;
+    background: linear-gradient(135deg,#7f53ac 60%,#43e97b80 100%);
     font-size:2.2rem; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
     transition: border 0.15s, background 0.15s;
 }
 #profile-choices .selected {
-    border:3px solid #2fe3e5;
-    background: linear-gradient(135deg,#46a6ff 40%,#43ffb4 100%);
+    border:3px solid #38f9d7;
+    background: linear-gradient(135deg,#43e97b 40%,#7f53ac 100%);
     color: #fff;
 }
 #graph-view, #history-view {
-    background: linear-gradient(90deg,#0c4270 60%,#43ffb420 100%);
+    background: linear-gradient(90deg,#1a1c3e 60%,#38f9d720 100%);
     border-radius: 18px;
     padding: 18px 14px;
-    box-shadow: 0 1px 10px #29c0e520;
+    box-shadow: 0 1px 10px #43e97b12;
 }
 #history-list { padding-left: 0; }
 #history-list li {
     margin-bottom: 8px;
     font-size: 1rem;
-    color: #a8fff5;
+    color: #43e97b;
 }
 #clear-history-btn {
     margin-bottom: 10px;
-    background: #29c0e5;
-    color: #fff;
+    background: #38f9d7;
+    color: #0e1647;
     border: none;
     border-radius: 10px;
     padding: 7px 16px;
@@ -291,26 +352,26 @@ body {
     font-weight: 600;
     letter-spacing: 0.02em;
     cursor: pointer;
-    box-shadow: 0 1px 6px #43ffb430;
+    box-shadow: 0 1px 6px #43e97b30;
 }
 .auth-forms form { display: none; flex-direction: column; gap: 15px; }
 .auth-forms form.active { display: flex; }
 input[type="text"], input[type="password"], input[type="number"] {
     padding: 13px 15px;
     border-radius: 11px;
-    border: 1.5px solid #29c0e5;
-    background: #0c4270;
-    color: #f0fafc;
+    border: 1.5px solid #43e97b;
+    background: #1a1c3e;
+    color: #43e97b;
     font-size: 1em;
     outline: none;
 }
 input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
-    border-color: #43ffb4;
+    border-color: #38f9d7;
 }
 input[type="number"]::-webkit-inner-spin-button { appearance: none; }
 button[type="submit"] {
-    background: linear-gradient(90deg,#46a6ff 0%,#43ffb4 100%);
-    color: #fff;
+    background: linear-gradient(90deg,#43e97b 0%,#38f9d7 100%);
+    color: #0e1647;
     padding: 11px 0;
     border: none;
     border-radius: 13px;
@@ -324,7 +385,7 @@ button[type="submit"] {
 }
 button[type="submit"]:hover { opacity: 0.93; }
 .switch-link {
-    color: #2fe3e5;
+    color: #38f9d7;
     cursor: pointer;
     font-size: 0.96em;
     text-align: right;
@@ -333,35 +394,30 @@ button[type="submit"]:hover { opacity: 0.93; }
 .message {
     min-height: 18px;
     font-size: 1em;
-    color: #e6ff60;
-}
-@media (max-width: 500px) {
-    .container { max-width: 99vw; padding: 15px 1vw; }
-    .modal form { min-width: 0; max-width: 99vw; }
-    .pocket-card { min-width: 0; max-width: 99vw; }
+    color: #43e97b;
 }
 </style>
 </head>
 <body>
-<div class="theme-version">Piggyverse Theme v31.01.1111</div>
+<div class="theme-version">Sparkle Wallet Theme (Piggyverse)</div>
 <!-- Auth section -->
 <div class="container" id="auth-section">
     <div class="auth-forms">
         <form id="login-form" class="active">
-            <h2>เข้าสู่ระบบ</h2>
-            <input type="text" id="login-username" placeholder="ชื่อผู้ใช้" required>
-            <input type="password" id="login-password" placeholder="รหัสผ่าน" required>
-            <button type="submit">เข้าสู่ระบบ</button>
-            <span class="switch-link" onclick="switchForm('register-form')">ยังไม่มีบัญชี? สมัครสมาชิก</span>
+            <h2>Sign In</h2>
+            <input type="text" id="login-username" placeholder="Username" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+            <span class="switch-link" onclick="switchForm('register-form')">Don't have an account? Register</span>
             <div class="message" id="login-message"></div>
         </form>
         <form id="register-form">
-            <h2>สมัครสมาชิก</h2>
-            <input type="text" id="register-username" placeholder="ชื่อผู้ใช้" required>
-            <input type="password" id="register-password" placeholder="รหัสผ่าน" required>
-            <input type="password" id="register-password2" placeholder="ยืนยันรหัสผ่าน" required>
-            <button type="submit">สมัครสมาชิก</button>
-            <span class="switch-link" onclick="switchForm('login-form')">มีบัญชีแล้ว? เข้าสู่ระบบ</span>
+            <h2>Register</h2>
+            <input type="text" id="register-username" placeholder="Username" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <input type="password" id="register-password2" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+            <span class="switch-link" onclick="switchForm('login-form')">Already have an account? Sign In</span>
             <div class="message" id="register-message"></div>
         </form>
     </div>
@@ -370,49 +426,48 @@ button[type="submit"]:hover { opacity: 0.93; }
 <!-- Piggyverse App Section -->
 <div class="container" id="app-section" style="display:none;">
     <nav class="menu-bar">
-        <button id="menu-home" class="active">🏠 หน้าหลัก</button>
-        <button id="menu-graph">📊 กราฟ</button>
-        <button id="menu-history">📜 ประวัติออม</button>
-        <button id="toggle-online" class="online">🟢 ออนไลน์</button>
-        <button id="logout-btn">🚪 ออกจากระบบ</button>
+        <button id="menu-home" class="active"><span>Home</span></button>
+        <button id="menu-graph"><span>Graph</span></button>
+        <button id="menu-history"><span>History</span></button>
+        <button id="toggle-online" class="online"><span>Online</span></button>
+        <button id="logout-btn"><span>Logout</span></button>
     </nav>
     <section id="home-view">
         <div id="welcome-user"></div>
-        <button id="add-pocket-btn">+ สร้าง Cloud Pocket</button>
+        <button id="add-pocket-btn">+ Add Cloud Pocket</button>
         <div id="pockets-list"></div>
     </section>
-    <!-- Modal for Add Pocket -->
     <div class="modal" id="pocket-modal">
         <form id="pocket-form">
-            <h3>สร้าง Cloud Pocket</h3>
-            <label>ชื่อกระปุก <input type="text" id="pocket-name" required></label>
-            <label>โปรไฟล์
+            <h3>Add Cloud Pocket</h3>
+            <label>Pocket Name <input type="text" id="pocket-name" required></label>
+            <label>Profile
                 <div id="profile-choices"></div>
             </label>
-            <label>ประเภทออม
+            <label>Savings Type
                 <select id="saving-type">
-                    <option value="ทั่วไป">ทั่วไป</option>
-                    <option value="รายวัน">รายวัน</option>
-                    <option value="รายเดือน">รายเดือน</option>
+                    <option value="General">General</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Monthly">Monthly</option>
                 </select>
             </label>
-            <label>เป้าหมายเงิน <input type="number" id="goal-amount" min="1" required></label>
-            <button type="submit">บันทึก</button>
-            <button type="button" id="cancel-pocket">ยกเลิก</button>
+            <label>Goal Amount <input type="number" id="goal-amount" min="1" required></label>
+            <button type="submit">Save</button>
+            <button type="button" id="cancel-pocket">Cancel</button>
         </form>
     </div>
     <!-- Graph View -->
     <section id="graph-view" style="display:none;">
-        <h2>กราฟการออม</h2>
+        <h2>Savings Graph</h2>
         <div id="graph-switch">
-            <button id="graph-daily" class="active">ต่อวัน</button>
-            <button id="graph-monthly">ต่อเดือน</button>
+            <button id="graph-daily" class="active">Daily</button>
+            <button id="graph-monthly">Monthly</button>
         </div>
         <canvas id="saving-graph" width="350" height="200"></canvas>
     </section>
     <!-- History View -->
     <section id="history-view" style="display:none;">
-        <h2>ประวัติการออม</h2>
+        <h2>Savings History</h2>
         <ul id="history-list"></ul>
     </section>
 </div>
@@ -448,24 +503,24 @@ document.getElementById('register-form').onsubmit = function (e) {
     const msg = document.getElementById('register-message');
     let users = getUsers();
     if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
-        msg.textContent = "ชื่อผู้ใช้ควรมี 3-20 ตัวอักษร (a-z, 0-9, _)";
+        msg.textContent = "Username must be 3-20 characters (a-z, 0-9, _)";
         return;
     }
     if (users[username]) {
-        msg.textContent = "ชื่อผู้ใช้นี้ถูกใช้งานแล้ว";
+        msg.textContent = "This username is already taken";
         return;
     }
     if (password.length < 6) {
-        msg.textContent = "รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร";
+        msg.textContent = "Password must be at least 6 characters";
         return;
     }
     if (password !== password2) {
-        msg.textContent = "รหัสผ่านไม่ตรงกัน";
+        msg.textContent = "Passwords do not match";
         return;
     }
     users[username] = { password: password, pockets: [], history: [] };
     setUsers(users);
-    msg.textContent = "สมัครสำเร็จ! กรุณาเข้าสู่ระบบ";
+    msg.textContent = "Registration successful! Please sign in.";
     setTimeout(() => switchForm('login-form'), 900);
 };
 document.getElementById('login-form').onsubmit = function (e) {
@@ -475,7 +530,7 @@ document.getElementById('login-form').onsubmit = function (e) {
     const msg = document.getElementById('login-message');
     let users = getUsers();
     if (!users[username] || users[username].password !== password) {
-        msg.textContent = "ชื่อผู้ใช้หรือรหัสผ่านผิด";
+        msg.textContent = "Incorrect username or password";
         return;
     }
     setSession(username);
@@ -506,7 +561,7 @@ function renderProfileChoices(selectedId = 1) {
         el.dataset.id = p.id;
         el.tabIndex = 0;
         el.setAttribute('role', 'button');
-        el.setAttribute('aria-label', 'เลือกโปรไฟล์');
+        el.setAttribute('aria-label', 'Select profile');
         el.onclick = function() {
             renderProfileChoices(p.id);
         };
@@ -534,7 +589,7 @@ function renderPockets() {
     const list = document.getElementById('pockets-list');
     list.innerHTML = '';
     if (!pockets.length) {
-        list.innerHTML = '<div style="color:#999;text-align:center;margin:20px 0;">ยังไม่มี Cloud Pocket</div>';
+        list.innerHTML = '<div style="color:#999;text-align:center;margin:20px 0;">No Cloud Pocket yet</div>';
         return;
     }
     pockets.forEach((pocket, idx) => {
@@ -546,15 +601,15 @@ function renderPockets() {
             <div class="pocket-profile">${profile.img}</div>
             <div class="pocket-info">
                 <div class="pocket-name">${pocket.name}</div>
-                <div class="pocket-meta">${pocket.type} | เป้าหมาย: ${pocket.goal} ฿ | ออมแล้ว: ${pocket.saved || 0} ฿</div>
+                <div class="pocket-meta">${pocket.type} | Goal: ${pocket.goal} ฿ | Saved: ${pocket.saved || 0} ฿</div>
                 <div class="progress-bar-bg">
                     <div class="progress-bar${isJustSaved?' just-saved':''}" style="width:${Math.min(100, Math.round((pocket.saved||0)/pocket.goal*100))}%"></div>
                 </div>
             </div>
             <div class="pocket-actions">
-                <input type="number" min="1" placeholder="ออม..." style="width:65px;" ${isOnline?'':'disabled'}>
-                <button ${isOnline?'':'disabled'}>ออม</button>
-                <button style="background:#29c0e5;" ${isOnline?'':'disabled'}>ลบ</button>
+                <input type="number" min="1" placeholder="Save..." style="width:65px;" ${isOnline?'':'disabled'}>
+                <button ${isOnline?'':'disabled'}>Save</button>
+                <button style="background:#7f53ac;color:#fff;" ${isOnline?'':'disabled'}>Delete</button>
             </div>
         `;
         // Deposit
@@ -577,7 +632,7 @@ function renderPockets() {
         // Remove
         card.querySelectorAll('button')[1].onclick = function() {
             if (!isOnline) return;
-            if (confirm('ลบ Cloud Pocket นี้?')) {
+            if (confirm('Delete this Cloud Pocket?')) {
                 pockets.splice(idx, 1);
                 savePockets(pockets);
                 renderPockets();
@@ -613,7 +668,6 @@ document.getElementById('pocket-form').onsubmit = function(e) {
     renderPockets();
 };
 
-// MenuBar Navigation
 ['home','graph','history'].forEach(view=>{
     document.getElementById(`menu-${view}`).onclick = () => {
         ['home','graph','history'].forEach(v=>{
@@ -625,16 +679,13 @@ document.getElementById('pocket-form').onsubmit = function(e) {
         if (view==='history') renderHistory();
     };
 });
-
-// Online/Offline toggle
 document.getElementById('toggle-online').onclick = function() {
     isOnline = !isOnline;
     this.className = isOnline ? 'online' : 'offline';
-    this.innerHTML = isOnline ? '🟢 ออนไลน์' : '⚪️ ออฟไลน์';
+    this.innerHTML = isOnline ? '<span>Online</span>' : '<span>Offline</span>';
     renderPockets();
 };
 
-// History
 function getHistory() {
     const user = getSession();
     let users = getUsers();
@@ -656,18 +707,18 @@ function renderHistory() {
     const h = getHistory();
     if (!document.getElementById('clear-history-btn')) {
         const btn = document.createElement('button');
-        btn.textContent = "🗑️ ลบประวัติทั้งหมด";
+        btn.textContent = "🗑️ Clear All History";
         btn.id = "clear-history-btn";
         btn.className = "clear-history-btn";
         btn.onclick = function() {
-            if (confirm('ต้องการลบประวัติการออมทั้งหมดหรือไม่?')) {
+            if (confirm('Clear all savings history?')) {
                 saveHistory([]);
                 renderHistory();
             }
         };
         document.getElementById('history-view').insertBefore(btn, list);
     }
-    if (!h.length) { list.innerHTML = '<li>ยังไม่มีประวัติการออม</li>'; return; }
+    if (!h.length) { list.innerHTML = '<li>No savings history yet</li>'; return; }
     list.innerHTML = '';
     h.forEach(item=>{
         let li = document.createElement('li');
@@ -676,7 +727,6 @@ function renderHistory() {
     });
 }
 
-// กราฟแท่ง: ยอดรวมการออมต่อวัน/ต่อเดือน
 let graphMode = "daily";
 document.getElementById("graph-daily").onclick = function() {
     graphMode = "daily";
@@ -696,9 +746,9 @@ function renderGraph() {
     ctx.clearRect(0,0,c.width,c.height);
     const history = getHistory();
     if (!history.length) {
-        ctx.fillStyle = "#a8fff5";
+        ctx.fillStyle = "#43e97b";
         ctx.font = "16px Inter,Prompt,sans-serif";
-        ctx.fillText("ยังไม่มีข้อมูลออม", 60, 110);
+        ctx.fillText("No savings data", 60, 110);
         return;
     }
     let dataMap = {}, keys = [];
@@ -710,7 +760,7 @@ function renderGraph() {
             if (!dstr) return;
             dataMap[dstr] = (dataMap[dstr]||0) + amt;
         });
-        keys = Object.keys(dataMap).sort(); // date ascending
+        keys = Object.keys(dataMap).sort();
     } else if (graphMode==="monthly") {
         history.forEach(item => {
             const amt = parseInt(item.amount);
@@ -722,12 +772,11 @@ function renderGraph() {
         keys = Object.keys(dataMap).sort();
     }
     if (!keys.length) {
-        ctx.fillStyle = "#a8fff5";
+        ctx.fillStyle = "#43e97b";
         ctx.font = "16px Inter,Prompt,sans-serif";
-        ctx.fillText("ยังไม่มีข้อมูลออม", 60, 110);
+        ctx.fillText("No savings data", 60, 110);
         return;
     }
-    // วาดกราฟแท่ง
     let barW = 18, gap = 10, maxY = 150, startX = 38, baseY = 180;
     if(keys.length>13) { barW = Math.max(8, 260/keys.length); gap = 4; }
     const maxSum = Math.max(...Object.values(dataMap));
@@ -735,9 +784,9 @@ function renderGraph() {
         const sum = dataMap[k];
         const h = Math.round((sum/maxSum) * maxY);
         const x = startX + i*(barW+gap);
-        ctx.fillStyle = "#2fe3e5";
+        ctx.fillStyle = "#43e97b";
         ctx.fillRect(x, baseY-h, barW, h);
-        ctx.fillStyle = "#fff";
+        ctx.fillStyle = "#0e1647";
         ctx.font = "bold 12px Inter,Prompt,sans-serif";
         ctx.fillText(sum+" ฿", x, baseY-h-6);
         ctx.save();
@@ -745,23 +794,20 @@ function renderGraph() {
         ctx.rotate(-Math.PI/6);
         ctx.textAlign = "center";
         ctx.font = "11px Prompt,sans-serif";
-        ctx.fillStyle = "#ffe06b";
+        ctx.fillStyle = "#7f53ac";
         ctx.fillText(k, 0, 0);
         ctx.restore();
     });
-    // Y axis
-    ctx.strokeStyle = "#43ffb4";
+    ctx.strokeStyle = "#43e97b";
     ctx.beginPath();
     ctx.moveTo(startX-10, baseY-maxY);
     ctx.lineTo(startX-10, baseY+2);
     ctx.stroke();
     ctx.font = "12px Inter,Prompt,sans-serif";
-    ctx.fillStyle = "#43ffb4";
+    ctx.fillStyle = "#43e97b";
     ctx.fillText(maxSum+" ฿", 2, baseY-maxY+8);
     ctx.fillText("0", 12, baseY+2);
 }
-
-// Show Welcome
 function showWelcome() {
     const username = getSession();
     let el = document.getElementById('welcome-user');
@@ -769,7 +815,6 @@ function showWelcome() {
         el.textContent = `Welcome, ${username}! 👋`;
     }
 }
-
 function showApp() {
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('app-section').style.display = '';
