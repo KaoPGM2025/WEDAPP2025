@@ -48,7 +48,7 @@ body {
     margin-bottom: 20px;
     background: rgba(67, 233, 123, 0.13);
     border-radius: 14px;
-    padding: 6px 6px 6px 6px;
+    padding: 4px 3px 4px 3px; /* ลด padding */
     box-shadow: 0 2px 8px 0 rgba(67, 233, 123, 0.10);
     overflow-x: unset;
 }
@@ -56,14 +56,14 @@ body {
     border: none;
     background: transparent;
     color: #43e97b;
-    padding: 10px 0;
+    padding: 7px 0;
     border-radius: 0;
     font-weight: 700;
     font-family: 'Inter', 'Prompt', sans-serif;
-    font-size: 1.08em;
-    min-width: 114px;
-    max-width: 180px;
-    height: 44px;
+    font-size: 0.98em;
+    min-width: 75px;
+    max-width: 120px;
+    height: 32px;
     cursor: pointer;
     transition: background 0.18s, color 0.17s;
     outline: none;
@@ -84,20 +84,20 @@ body {
     width: 100%;
     font-family: 'Inter', 'Prompt', sans-serif;
     font-weight: 700;
-    font-size: 1.03em;
+    font-size: 0.96em;
     letter-spacing: 0.01em;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .menu-bar button:first-child {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     border-left: none !important;
 }
 .menu-bar button:last-child {
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     border-right: none;
 }
 .menu-bar button.active, .menu-bar button.online {
@@ -113,29 +113,26 @@ body {
 .menu-bar button#logout-btn {
     background: #38f9d7;
     color: #0e1647;
-    min-width: 114px;
+    min-width: 75px;
     font-weight: 700;
     z-index: 2;
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 10px 10px 0;
     border-right: none;
 }
 @media (max-width: 640px) {
     .menu-bar button {
-        font-size: 1em;
-        min-width: 80px;
-        padding: 9px 0;
-        height: 38px;
-        max-width: 140px;
+        font-size: 0.92em;
+        min-width: 60px;
+        padding: 6px 0;
+        height: 28px;
+        max-width: 90px;
     }
     .menu-bar button span {
-        font-size: 1em;
+        font-size: 0.93em;
     }
 }
 @media (max-width: 500px) {
-    .container { max-width: 99vw; padding: 15px 1vw; }
-    .modal form { min-width: 0; max-width: 99vw; }
-    .pocket-card { min-width: 0; max-width: 99vw; }
-    .menu-bar { padding: 3px 1px 3px 1px; }
+    .menu-bar { padding: 2px 1px 2px 1px; }
 }
 #graph-switch {
     display: flex;
